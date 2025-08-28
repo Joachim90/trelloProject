@@ -10,8 +10,12 @@
 <ul>
     <li th:each="board : ${boards}">
         <strong th:text="${board.name}"></strong>
+        <form th:action="@{/lists/{id}(id=${board.id})}" method="get">
+            <button type="submit">Visa listor</button>
+        </form>
     </li>
 </ul>
+
 
 <h2>Lägg till nytt kort</h2>
 <form th:action="@{/addCard}" method="post">

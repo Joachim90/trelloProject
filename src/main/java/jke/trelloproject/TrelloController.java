@@ -27,4 +27,10 @@ public class TrelloController {
         model.addAttribute("boards", trelloService.getBoards());
         return "boards";
     }
+
+    @GetMapping("/lists/{boardId}")
+    public String getLists(@PathVariable String boardId, Model model) {
+        model.addAttribute("lists", trelloService.getLists(boardId));
+        return "lists"; // <-- new Thymeleaf template
+    }
 }

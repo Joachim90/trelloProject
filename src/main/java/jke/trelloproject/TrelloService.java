@@ -53,5 +53,24 @@ public class TrelloService {
                 .bodyToMono(String.class)
                 .block();
     }
+
+    /** Hämta alla listor för en specifik board */
+    public List<TrelloList> getLists(String boardId) {
+        TrelloList[] lists = webClient.get()
+                .uri(uriBuilder -> uriBuilder
+                        .path("/boards/{boardId}/lists")
+                        .queryParam("key", apiKey)
+                        .queryParam("token", apiToken)
+                        .build(boardId))
+                .retrieve()
+                .bodyToMono(TrelloList[].class)
+                .block();
+
+        return Arrays.asList(lists);
+    }
+
+    record TrelloList(String id, String name) {}
 }
+
+
 

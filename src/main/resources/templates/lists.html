@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Listor i board</title>
+    <meta charset="UTF-8"/>
+</head>
+<body>
+<h1>Listor i denna board</h1>
+
+<ul>
+    <li th:each="list : ${lists}">
+        <span th:text="${list.name}"></span> (ID: <span th:text="${list.id}"></span>)
+    </li>
+</ul>
+
+<a href="/boards">Tillbaka till boards</a>
+</body>
+</html>
