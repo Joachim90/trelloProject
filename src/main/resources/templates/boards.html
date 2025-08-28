@@ -1,8 +1,34 @@
-<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Mina Trello-boards</title>
     <meta charset="UTF-8"/>
+    <style>
+        .list-button {
+            padding: 8px 16px;
+            margin: 5px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            background-color: #e0e0e0;
+        }
+
+        .list-button.selected {
+            background-color: #4CAF50; /* green when selected */
+            color: white;
+        }
+    </style>
+    <script>
+        function setListId(listId, button) {
+            document.getElementById("listId").value = listId;
+
+            // reset all buttons
+            let buttons = document.querySelectorAll(".list-button");
+            buttons.forEach(btn => btn.classList.remove("selected"));
+
+            // highlight clicked button
+            button.classList.add("selected");
+        }
+    </script>
 </head>
 <body>
 <h1>Mina Trello-boards</h1>
@@ -14,9 +40,22 @@
 </ul>
 
 <h2>Lägg till nytt kort</h2>
+
+<!-- Buttons for quick list selection -->
+<div>
+    <button type="button" class="list-button"
+            onclick="setListId('68b002990e996331852569aa', this)">Att göra</button>
+
+    <button type="button" class="list-button"
+            onclick="setListId('68b002990e996331852569ab', this)">Gör</button>
+
+    <button type="button" class="list-button"
+            onclick="setListId('68b002990e996331852569ac', this)">Gjort</button>
+</div>
+
+<!-- Form -->
 <form th:action="@{/addCard}" method="post">
-    <label for="listId">List ID:</label>
-    <input type="text" name="listId" id="listId" required />
+    <input type="hidden" name="listId" id="listId" required />
 
     <label for="name">Kortets namn:</label>
     <input type="text" name="name" id="name" required />
