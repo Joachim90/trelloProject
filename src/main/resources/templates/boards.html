@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Mina Trello-boards</title>
+    <meta charset="UTF-8"/>
+</head>
+<body>
+<h1>Mina Trello-boards</h1>
+
+<ul>
+    <li th:each="board : ${boards}">
+        <strong th:text="${board.name}"></strong>
+    </li>
+</ul>
+
+<h2>Lägg till nytt kort</h2>
+<form th:action="@{/addCard}" method="post">
+    <label for="listId">List ID:</label>
+    <input type="text" name="listId" id="listId" required />
+
+    <label for="name">Kortets namn:</label>
+    <input type="text" name="name" id="name" required />
+
+    <button type="submit">Skapa kort</button>
+</form>
+
+</body>
+</html>
